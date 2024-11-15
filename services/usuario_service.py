@@ -32,8 +32,8 @@ def atualizar_account_id(
         elo: str = 'Não Definido', 
         ultimaAtividade: int = 0, 
         banida: int = 0):
-    
-    Account.update(
+
+    query = Account.update(
         user=user,
         password=password,
         nametag=nametag,
@@ -43,5 +43,7 @@ def atualizar_account_id(
         ultimaAtividade=ultimaAtividade,
         banida=banida).where(Account.key == key)
 
+    query.execute()
+    
 def obter_accounts():
     return list(Account.select())

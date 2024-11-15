@@ -3,7 +3,6 @@ from datetime import datetime
 from config import db
 
 
-
 # Account Model
 class Account(Model):
     key = AutoField()
@@ -25,7 +24,8 @@ class Account(Model):
     def save(self, *args, **kwargs):
         self.dataAtualizacao = datetime.now()
         return super().save(*args, **kwargs)
-    
+
+
 # Criar a tabela 'Usuario' apenas se ela não existir
 db.connect()
 db.create_tables([Account], safe=True)
