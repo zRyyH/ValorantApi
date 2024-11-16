@@ -1,17 +1,20 @@
-# Imagem base para build
-FROM python:3.12-slim AS builder
+# Usa uma imagem Python como base
+FROM python:3.12
 
+# Define o diretório de trabalho dentro do container
 WORKDIR /app
-COPY requirements.txt .
-RUN pip install --user --no-cache-dir -r requirements.txt --break-system-packages
 
-# Imagem final
-FROM python:3.12-slim
+# Copia os arquivos para o container
+COPY . /app
 
-WORKDIR /app
-COPY --from=builder /root/.local /root/.local
-ENV PATH=/root/.local/bin:$PATH
-COPY . .
+# Instala o Apache
+RUN apt-get update
 
-EXPOSE 5000
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
+# Instala as dependências do Python
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Expõe as portas para acesso externo
+EXPOSE 3000
+
+# Define o comando para iniciar o Gunicorn
+CMD gunicorn -w 4 -b 0.0.0.0:3000 app:app

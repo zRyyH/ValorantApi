@@ -4,7 +4,7 @@ def criar_account(
         user: str, 
         password: str, 
         nametag: str, 
-        idCompra: str,
+        idCompra: str = 'Não Definido',
         email: str = 'Não Definido', 
         elo: str = 'Não Definido', 
         ultimaAtividade: int = 0, 
@@ -27,7 +27,7 @@ def atualizar_account_id(
         user: str, 
         password: str, 
         nametag: str, 
-        idCompra: str,
+        idCompra: str = 'Não Definido',
         email: str = 'Não Definido', 
         elo: str = 'Não Definido', 
         ultimaAtividade: int = 0, 
@@ -46,4 +46,9 @@ def atualizar_account_id(
     query.execute()
     
 def obter_accounts():
-    return list(Account.select())
+    query = Account.select()
+
+    # Converter para dicionários:
+    dados = list(query.dicts())
+
+    return dados

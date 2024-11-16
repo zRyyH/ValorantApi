@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 
 @app.route('/api/account', methods=['POST'])
-def criar_account():
+def account_post():
     # Obtendo json
     dados = request.get_json()
 
@@ -20,7 +20,7 @@ def criar_account():
 
 
 @app.route('/api/account', methods=['PUT'])
-def atualizar_account():
+def account_put():
     # Obtendo json
     dados = request.get_json()
 
@@ -32,13 +32,13 @@ def atualizar_account():
 
 
 @app.route('/api/accounts', methods=['GET'])
-def get_accounts():
+def account_get():
     # Criar account
     accounts = obter_accounts()
     print(accounts)
     # Processar os dados conforme necessário
-    return jsonify({'data': accounts}), 200
+    return jsonify(accounts), 200
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=3000)
