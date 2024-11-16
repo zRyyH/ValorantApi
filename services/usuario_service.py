@@ -7,7 +7,7 @@ def criar_account(
         idCompra: str = 'Não Definido',
         email: str = 'Não Definido', 
         elo: str = 'Não Definido', 
-        ultimaAtividade: int = 0, 
+        ultimaAtividade: str = 'Não Definido', 
         banida: int = 0):
     
     usuario = Account.create(
@@ -30,7 +30,7 @@ def atualizar_account_id(
         idCompra: str = 'Não Definido',
         email: str = 'Não Definido', 
         elo: str = 'Não Definido', 
-        ultimaAtividade: int = 0, 
+        ultimaAtividade: str = 'Não Definido', 
         banida: int = 0):
 
     query = Account.update(
