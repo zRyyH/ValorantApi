@@ -11,11 +11,12 @@ def account_post():
     dados = request.get_json()
 
     # Criar account
-    if data := criar_account(**dados):
-        # Processar os dados conforme necessário
+    response = criar_account(**dados)
+
+    if response["status"] == True:
         return jsonify({"mensagem": "Conta criada com sucesso!"}), 200
     else:
-        return jsonify({"mensagem": data}), 200
+        return jsonify({"mensagem": response["error"]}), 500
 
 
 @app.route("/api/account", methods=["PUT"])
@@ -23,23 +24,24 @@ def account_put():
     # Obtendo json
     dados = request.get_json()
 
-    # Criar account
-    if data := atualizar_account_id(**dados):
+    # Atualizar account
+    response = atualizar_account_id(**dados)
+
+    if response["status"] == True:
         return jsonify({"mensagem": "Conta atualizada com sucesso!"}), 200
     else:
-        return jsonify({"mensagem": data}), 200
+        return jsonify({"mensagem": response["error"]}), 500
 
 
 @app.route("/api/accounts", methods=["GET"])
 def account_get():
-    # Criar account
-    accounts = obter_accounts()
+    # Obter accounts
+    response = obter_accounts()
 
-    if accounts := obter_accounts():
-        # Processar os dados conforme necessário
-        return jsonify(accounts), 200
+    if response["status"] == True:
+        return jsonify({"mensagem": response["result"]}), 200
     else:
-        return jsonify({"mensagem": "Nenhuma conta encontrada!"}), 200
+        return jsonify({"mensagem": response["error"]}), 500
 
 
 if __name__ == "__main__":

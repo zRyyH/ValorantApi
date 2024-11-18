@@ -25,9 +25,9 @@ def criar_account(
             banida=banida,
         )
 
-        return True
+        return {"result": None, "status": True}
     except:
-        return traceback.format_exc()
+        return {"result": None, "status": False, "error": traceback.format_exc()}
 
 
 def atualizar_account_id(
@@ -56,9 +56,9 @@ def atualizar_account_id(
 
         query.execute()
 
-        return True
+        return {"result": None, "status": True}
     except:
-        return traceback.format_exc()
+        return {"result": None, "status": False, "error": traceback.format_exc()}
 
 
 def obter_accounts():
@@ -68,6 +68,6 @@ def obter_accounts():
         # Converter para dicionários:
         dados = list(query.dicts())
 
-        return dados
+        return {"result": dados, "status": True}
     except:
-        return traceback.format_exc()
+        return {"result": None, "status": False, "error": traceback.format_exc()}
