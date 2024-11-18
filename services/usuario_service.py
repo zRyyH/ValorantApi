@@ -1,18 +1,18 @@
 from models import Account
 import traceback
-import json
 
 
 def criar_account(
-        user: str, 
-        password: str, 
-        nametag: str, 
-        idCompra: str = 'Não Definido',
-        email: str = 'Não Definido', 
-        elo: str = 'Não Definido', 
-        ultimaAtividade: str = 'Não Definido', 
-        banida: int = 0):
-    
+    user: str,
+    password: str,
+    nametag: str,
+    idCompra: str = "Não Definido",
+    email: str = "Não Definido",
+    elo: str = "Não Definido",
+    ultimaAtividade: str = "Não Definido",
+    banida: int = 0,
+):
+
     try:
         Account.create(
             user=user,
@@ -22,23 +22,26 @@ def criar_account(
             email=email,
             elo=elo,
             ultimaAtividade=ultimaAtividade,
-            banida=banida)
-        
+            banida=banida,
+        )
+
         return True
     except:
         return traceback.format_exc()
-    
+
+
 def atualizar_account_id(
-        key: int, 
-        user: str, 
-        password: str, 
-        nametag: str, 
-        idCompra: str = 'Não Definido',
-        email: str = 'Não Definido', 
-        elo: str = 'Não Definido', 
-        ultimaAtividade: str = 'Não Definido', 
-        banida: int = 0):
-    
+    key: int,
+    user: str,
+    password: str,
+    nametag: str,
+    idCompra: str = "Não Definido",
+    email: str = "Não Definido",
+    elo: str = "Não Definido",
+    ultimaAtividade: str = "Não Definido",
+    banida: int = 0,
+):
+
     try:
         query = Account.update(
             user=user,
@@ -48,13 +51,15 @@ def atualizar_account_id(
             email=email,
             elo=elo,
             ultimaAtividade=ultimaAtividade,
-            banida=banida).where(Account.key == key)
+            banida=banida,
+        ).where(Account.key == key)
 
         query.execute()
 
         return True
     except:
         return traceback.format_exc()
+
 
 def obter_accounts():
     try:
