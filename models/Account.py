@@ -2,7 +2,6 @@ from peewee import Model, CharField, IntegerField, DateTimeField, AutoField
 from datetime import datetime
 from config import db
 
-
 # Account Model
 class Account(Model):
     key = AutoField()
