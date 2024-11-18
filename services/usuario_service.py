@@ -1,4 +1,7 @@
 from models import Account
+import traceback
+import json
+
 
 def criar_account(
         user: str, 
@@ -10,18 +13,21 @@ def criar_account(
         ultimaAtividade: str = 'Não Definido', 
         banida: int = 0):
     
-    usuario = Account.create(
-        user=user,
-        password=password,
-        nametag=nametag,
-        idCompra=idCompra,
-        email=email,
-        elo=elo,
-        ultimaAtividade=ultimaAtividade,
-        banida=banida)
+    try:
+        Account.create(
+            user=user,
+            password=password,
+            nametag=nametag,
+            idCompra=idCompra,
+            email=email,
+            elo=elo,
+            ultimaAtividade=ultimaAtividade,
+            banida=banida)
+        
+        return True
+    except:
+        return traceback.format_exc()
     
-    return usuario
-
 def atualizar_account_id(
         key: int, 
         user: str, 
@@ -32,23 +38,31 @@ def atualizar_account_id(
         elo: str = 'Não Definido', 
         ultimaAtividade: str = 'Não Definido', 
         banida: int = 0):
-
-    query = Account.update(
-        user=user,
-        password=password,
-        nametag=nametag,
-        idCompra=idCompra,
-        email=email,
-        elo=elo,
-        ultimaAtividade=ultimaAtividade,
-        banida=banida).where(Account.key == key)
-
-    query.execute()
     
+    try:
+        query = Account.update(
+            user=user,
+            password=password,
+            nametag=nametag,
+            idCompra=idCompra,
+            email=email,
+            elo=elo,
+            ultimaAtividade=ultimaAtividade,
+            banida=banida).where(Account.key == key)
+
+        query.execute()
+
+        return True
+    except:
+        return traceback.format_exc()
+
 def obter_accounts():
-    query = Account.select()
+    try:
+        query = Account.select()
 
-    # Converter para dicionários:
-    dados = list(query.dicts())
+        # Converter para dicionários:
+        dados = list(query.dicts())
 
-    return dados
+        return dados
+    except:
+        return traceback.format_exc()

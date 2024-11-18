@@ -13,10 +13,11 @@ def account_post():
     dados = request.get_json()
 
     # Criar account
-    criar_account(**dados)
-
-    # Processar os dados conforme necessário
-    return jsonify({"mensagem": "Conta criada com sucesso!"}), 200
+    if data := criar_account(**dados):
+        # Processar os dados conforme necessário
+        return jsonify({"mensagem": data}), 200
+    else:
+        return jsonify({"mensagem": data}), 200
 
 
 @app.route('/api/account', methods=['PUT'])
