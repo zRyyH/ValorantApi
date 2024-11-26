@@ -1,2 +1,2 @@
-from .Account import Account
-__all__ = ['Account']
+from .User import User
+__all__ = ['User']
